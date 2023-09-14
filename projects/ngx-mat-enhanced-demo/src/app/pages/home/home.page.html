@@ -1,0 +1,48 @@
+<fieldset>
+  <legend>Medias</legend>
+
+  <ngx-mat-enhanced-medias
+    [fileInput]="newFile"
+    color="accent"
+    [draggableItems]="true"
+  ></ngx-mat-enhanced-medias>
+
+  <form [formGroup]="mediaForm">
+    <label
+      class="mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base"
+      (click)="fileInput.click()"
+    >
+      <mat-icon>upload</mat-icon> Upload a file
+    </label>
+
+    <input
+      hidden
+      type="file"
+      formControlName="input"
+      (change)="onFileInput($event)"
+      #fileInput
+    />
+  </form>
+
+  <button (click)="onDeleteSelected()" mat-button color="warn">
+    <mat-icon>delete</mat-icon> Delete selected medias
+  </button>
+</fieldset>
+
+<div style="padding: 25px 0">
+  <mat-divider></mat-divider>
+</div>
+
+<fieldset>
+  <legend>Breadcrumb</legend>
+
+  <ngx-mat-enhanced-breadcrumb
+    [path]="pagePathObject"
+    [options]="breadcrumOptions"
+  ></ngx-mat-enhanced-breadcrumb>
+
+  <ngx-mat-enhanced-breadcrumb
+    [path]="pagePathObjectText"
+    [options]="breadcrumOptionsText"
+  ></ngx-mat-enhanced-breadcrumb>
+</fieldset>

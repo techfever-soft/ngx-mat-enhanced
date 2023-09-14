@@ -1,0 +1,19 @@
+:host {
+    display: flex;
+    .mdc-breadcrum__container {
+        display: flex;
+        text-wrap: nowrap;
+        overflow: auto;
+        overflow-y: hidden;
+        .mdc-breadcrum--item {
+            display: flex;
+            align-items: center;
+            .mdc-breadcrum--item__text {
+                text-decoration: none;
+            }
+            .mdc-breadcrum--item__icon {
+                margin: 0 10px;
+            }
+        }
+    }
+}

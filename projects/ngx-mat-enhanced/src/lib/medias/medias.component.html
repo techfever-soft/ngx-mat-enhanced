@@ -1,0 +1,60 @@
+<div
+  class="mat-mdc-media-list"
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  (cdkDropListDropped)="drop($event)"
+  cdkDropListLockAxis="x"
+>
+  <div
+    cdkDrag
+    cdkDragBoundary=".mat-mdc-media-list"
+    [cdkDragDisabled]="!draggableItems"
+    *ngFor="let media of mediasList"
+    class="mat-mdc-media-list__item mat-mdc-media-list__item-lg {{
+      media.selected ? 'selected' : ''
+    }} {{ media.loading ? 'disabled' : '' }}"
+    (click)="media.loading ? '' : selectFile(media)"
+    [@scaleAnimation]="media"
+  >
+    <div
+      class="mat-mdc-media-list__item--placeholder"
+      *cdkDragPlaceholder
+    ></div>
+    <mat-card>
+      <div *ngIf="media.loading" class="mat-mdc-media-list__item--loader">
+        <mat-spinner diameter="60"></mat-spinner>
+      </div>
+      <div [hidden]="media.loading">
+        <span *ngIf="media.type === 'image'">
+          <img mat-card-lg-image [src]="media.content" alt="test" />
+        </span>
+        <span *ngIf="media.type === 'file'">
+          <span *ngIf="media.content === 'text/plain'"
+            ><mat-icon class="mat-mdc-media-list__item--icon"
+              >description</mat-icon
+            ></span
+          >
+          <span *ngIf="media.content === 'application/pdf'"
+            ><mat-icon class="mat-mdc-media-list__item--icon"
+              >picture_as_pdf</mat-icon
+            ></span
+          >
+        </span>
+        <span *ngIf="media.type === 'audio'">
+          <span *ngIf="media.content === 'audio/mpeg'"
+            ><mat-icon class="mat-mdc-media-list__item--icon"
+              >graphic_eq</mat-icon
+            ></span
+          >
+        </span>
+      </div>
+    </mat-card>
+
+    <div class="mat-mdc-media-list__item--selection" *ngIf="!media.loading">
+      <button mat-icon-button *ngIf="draggableItems" cdkDragHandle>
+        <mat-icon>drag_indicator</mat-icon>
+      </button>
+      <mat-checkbox [checked]="media.selected" [color]="color"></mat-checkbox>
+    </div>
+  </div>
+</div>

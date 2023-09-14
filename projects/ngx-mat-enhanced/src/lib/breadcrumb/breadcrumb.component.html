@@ -1,0 +1,42 @@
+<div *ngIf="options.type === 'buttons'" class="mdc-breadcrum__container">
+  <div *ngFor="let item of path; let last = last" class="mdc-breadcrum--item">
+    <span *ngIf="item.active">
+      <button
+        mat-raised-button
+        [routerLink]="item.fullPath"
+        [color]="options.buttons?.activeItemColor"
+      >
+        {{ item.label }}
+      </button>
+    </span>
+    <div *ngIf="!item.active">
+      <button mat-button [routerLink]="item.fullPath">
+        {{ item.label }}
+      </button>
+    </div>
+    <div *ngIf="!last" class="mdc-breadcrum--item__icon">
+      <mat-icon>{{ options.separator?.icon }}</mat-icon>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="options.type === 'text'" class="mdc-breadcrum__container">
+  <div *ngFor="let item of path; let last = last" class="mdc-breadcrum--item">
+    <span *ngIf="item.active">
+      <a
+        class="mdc-breadcrum--item__text mdc-breadcrum--item-active"
+        [routerLink]="item.fullPath"
+      >
+        {{ item.label }}
+      </a>
+    </span>
+    <div *ngIf="!item.active">
+      <a class="mdc-breadcrum--item__text" [routerLink]="item.fullPath">
+        {{ item.label }}
+      </a>
+    </div>
+    <div *ngIf="!last" class="mdc-breadcrum--item__separator">
+      <mat-icon>{{ options.separator?.icon }}</mat-icon>
+    </div>
+  </div>
+</div>
